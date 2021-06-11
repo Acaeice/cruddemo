@@ -1,0 +1,12 @@
+#源代码管理时忽略的本地文件规则
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+*.log
+.idea/*
+.history
+go.sum

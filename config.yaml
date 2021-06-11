@@ -1,0 +1,50 @@
+
+# 数据库连接参数
+database:
+  # 连接字符串: 用户名:密码@tcp(数据库地址:端口)/数据库名?charset=utf8mb4&parseTime=true&loc=Local
+  dsn: root:Rootwang8023@tcp(rm-bp183059822trm717mo.mysql.rds.aliyuncs.com:3306)/cruddemo?charset=utf8mb4&parseTime=true&loc=Local
+  # 是否打开调试，true时控制台会输出所有执行的sql语句，生产环境改为false
+  debug: true
+
+# web引擎工作模式
+gin:
+  # 工作模式，默认为debug，生产环境改为release
+  mode: debug
+
+# 日志规则
+log:
+  # 采用logrus作为底层日志引擎
+  engine: logrus
+  # 是否在控制台输出日志，默认为true，生产环境改为false
+  enableConsole: true
+  # 日志输出级别，默认为debug，生产环境改为info
+  level: debug
+  # 文件输出路径，默认为当前文件夹下的log.log文件，生产环境改为/log/log.log
+  fileLocation: log.log
+  # 是否将日志输出到文件，默认为true
+  enableFile: true
+  # 是否在日志中添加调用函数的信息，默认为true
+  appendCaller: true
+  
+# 静态资源OSS配置
+staticOSS:
+  # 可访问oss的阿里云accessKeyID
+  accessKeyID: LTAIsbJer0OxstRR
+  # 可访问oss的阿里云accessKeySecret
+  accessKeySecret: VYRQUBzvQj2IIjvjFPTLNKXFuENhC6
+  # oss的公有云域名地址，在阿里云bucket首页可见
+  endPoint: oss-cn-shenzhen.aliyuncs.com
+  # oss的bucket名称
+  bucket: static-dmsj
+  # 上传静态文件的域名，由bucket和endPoint组成
+  host: http://static-dmsj.oss-cn-shenzhen.aliyuncs.com
+  # 上传后的可访问路径域名，完整的文件路径即为http://static.dongmenshijing.com/upload/abc.jpg
+  bindHost: http://static.dongmenshijing.com
+  # 后端生成的policy过期时间
+  expireTime: 6000000
+  # 上传文件的目录，位于bucket/下
+  uploadDir: upload
+  # 生成文件名的参数
+  base64Table: 123QRSTUabcdVWXYZHijKLAWDCABDstEFGuvwxyzGHIJklmnopqr234560178912
+  # 上传后的回调地址，该地址是供阿里云oss在后台访问，非项目代码访问
+  callbackURL: http://www.dongmenshijing.com/operation/api/oss/callback
