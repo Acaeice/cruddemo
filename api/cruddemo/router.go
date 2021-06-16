@@ -25,5 +25,6 @@ func initFreeCarRouter(api *gin.RouterGroup) {
 		freecar.GET("/code", getCode)
 		freecar.POST("/login", wechatQuickLogin)
 		freecar.GET("/user", getuserbyId)
+		freecar.GET("", answer)
 	}
 }

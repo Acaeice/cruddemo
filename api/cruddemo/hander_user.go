@@ -1,8 +1,12 @@
 package cruddemo
 
 import (
+	"crypto/sha1"
+	"encoding/hex"
 	"errors"
+	"fmt"
 	"log"
+	"sort"
 
 	"code.meikeland.com/wanghejun/cruddemo/internal/user"
 	"code.meikeland.com/wanghejun/cruddemo/pkg"
@@ -137,5 +141,34 @@ func getuserbyId(c *gin.Context) {
 
 	ok(c, resp{
 		"User": User,
+	})
+}
+
+//微信接入
+func answer(c *gin.Context) {
+	param := pkg.WxAccess{}
+	if err := c.ShouldBind(param); err != nil {
+		fail(c, errkit.Wrapf(err, "参数不正确"))
+		return
+	}
+	var token string = "rootwang8023"
+	var tempArray = []string{token, param.Timestamp, param.Nonce}
+	sort.Strings(tempArray)
+	sha1String := ""
+
+	for _, v := range tempArray {
+		sha1String += v
+	}
+	h := sha1.New()
+	h.Write([]byte(sha1String))
+	sha1String = hex.EncodeToString(h.Sum([]byte("")))
+	if sha1String == param.Signature {
+		fmt.Printf("接入成功")
+	} else {
+		fmt.Printf("接入失败")
+	}
+
+	ok(c, resp{
+		"Ok": param.Echostr,
 	})
 }
