@@ -26,9 +26,7 @@ RUN apk --no-cache add ca-certificates
 # 将程序部署在镜像的/root/目录下
 WORKDIR /root/
 # 复制部署内容
-COPY --from=golang-builder /go/src/code.meikeland.com/wanghejun/cruddemoapp .
-# 仅当程序中包含静态模板文件时进行复制
-# COPY --from=golang-builder /go/src/code.meikeland.com/xixia/xxwechatapp/template ./template
-# 设置端口和执行程序
+COPY --from=golang-builder /go/src/code.meikeland.com/wanghejun/cruddemo/app .
+
 EXPOSE 8081
 ENTRYPOINT ["./app"]
