@@ -1,6 +1,6 @@
 package user
 
-import "code.meikeland.com/wanghejun/cruddemo/internal/sql"
+import "github.com/wechatapi/cruddemo/internal/sql"
 
 var (
 	UserRepo userRepoI

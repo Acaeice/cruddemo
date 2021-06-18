@@ -3,7 +3,7 @@ package user
 import (
 	"context"
 
-	"code.meikeland.com/wanghejun/cruddemo/pkg"
+	"github.com/wechatapi/cruddemo/pkg"
 )
 
 type userRepoI interface {

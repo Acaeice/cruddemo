@@ -1,8 +1,7 @@
 package main
 
 import (
-	"code.meikeland.com/wanghejun/cruddemo/api/cruddemo"
-	_ "code.meikeland.com/wanghejun/cruddemo/docs"
+	"github.com/wechatapi/cruddemo/api/cruddemo"
 )
 
 // @title API
@@ -11,4 +10,3 @@ import (
 func main() {
 	cruddemo.Init()
 }
-	

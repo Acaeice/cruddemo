@@ -3,11 +3,11 @@ package cruddemo
 import (
 	"log"
 
-	"code.meikeland.com/wanghejun/cruddemo/internal/conf"
-	"code.meikeland.com/wanghejun/cruddemo/internal/sql"
-	"code.meikeland.com/wanghejun/cruddemo/internal/user"
 	"github.com/gin-gonic/gin"
 	"github.com/meikeland/logger"
+	"github.com/wechatapi/cruddemo/internal/conf"
+	"github.com/wechatapi/cruddemo/internal/sql"
+	"github.com/wechatapi/cruddemo/internal/user"
 )
 
 // Init 初始化服务

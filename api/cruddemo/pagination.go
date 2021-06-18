@@ -1,9 +1,9 @@
 package cruddemo
 
 import (
-	"code.meikeland.com/wanghejun/cruddemo/pkg"
-	"code.meikeland.com/wanghejun/cruddemo/util"
 	"github.com/gin-gonic/gin"
+	"github.com/wechatapi/cruddemo/pkg"
+	"github.com/wechatapi/cruddemo/util"
 )
 
 // defaultPage defaultPageSize 每页数据条数

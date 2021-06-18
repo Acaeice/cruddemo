@@ -3,7 +3,7 @@ package shared
 import (
 	"context"
 
-	"code.meikeland.com/wanghejun/cruddemo/pkg"
+	"github.com/wechatapi/cruddemo/pkg"
 )
 
 type key string

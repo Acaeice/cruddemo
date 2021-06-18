@@ -8,13 +8,13 @@ import (
 	"log"
 	"sort"
 
-	"code.meikeland.com/wanghejun/cruddemo/internal/user"
-	"code.meikeland.com/wanghejun/cruddemo/pkg"
-	"code.meikeland.com/wanghejun/cruddemo/util"
 	"github.com/aliyun/alibaba-cloud-sdk-go/sdk"
 	"github.com/aliyun/alibaba-cloud-sdk-go/sdk/requests"
 	"github.com/gin-gonic/gin"
 	"github.com/meikeland/errkit"
+	"github.com/wechatapi/cruddemo/internal/user"
+	"github.com/wechatapi/cruddemo/pkg"
+	"github.com/wechatapi/cruddemo/util"
 )
 
 const (
@@ -174,7 +174,6 @@ func answer(c *gin.Context) {
 		"Ok": param.Echostr,
 	})
 }
-
 
 //阿里智能语音交互Token更新
 func getToken(c *gin.Context) {

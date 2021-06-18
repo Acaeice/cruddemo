@@ -1,7 +1,7 @@
 # 生成Docker镜像的规则，先在一个go语言环境中打包代码，再在一个alpine环境中部署代码，生成最终的镜像文件
 FROM registry.cn-shenzhen.aliyuncs.com/mengine/golang:stretch as golang-builder
 # 将工作目录指定为与项目代码位置一致
-WORKDIR /go/src/github.com/cruddemo
+WORKDIR /go/src/github.com/wechatapi/cruddemo
 # 将代码从代码库复制到打包环境的WORKDIR
 COPY . .
 # 将main文件，从cmd中复制到WORKDIR的根目录
@@ -26,7 +26,7 @@ RUN apk --no-cache add ca-certificates
 # 将程序部署在镜像的/root/目录下
 WORKDIR /root/
 # 复制部署内容
-COPY --from=golang-builder /go/src/github.com/cruddemo/app .
+COPY --from=golang-builder /go/src/github.com/wechatapi/cruddemo/app .
 
 EXPOSE 8081
 ENTRYPOINT ["./app"]

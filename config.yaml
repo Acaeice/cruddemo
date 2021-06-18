@@ -29,13 +29,13 @@ log:
 # 静态资源OSS配置
 staticOSS:
   # 可访问oss的阿里云accessKeyID
-  accessKeyID: LTAIsbJer0OxstRR
+  accessKeyID: LTAI5tBcn1GoDktEP1VYrdbt
   # 可访问oss的阿里云accessKeySecret
-  accessKeySecret: VYRQUBzvQj2IIjvjFPTLNKXFuENhC6
+  accessKeySecret: UiQjLiwm5mVpRXVZSzZeRj4OxcLuzs
   # oss的公有云域名地址，在阿里云bucket首页可见
   endPoint: oss-cn-shenzhen.aliyuncs.com
   # oss的bucket名称
-  bucket: static-dmsj
+  bucket: Ro
   # 上传静态文件的域名，由bucket和endPoint组成
   host: http://static-dmsj.oss-cn-shenzhen.aliyuncs.com
   # 上传后的可访问路径域名，完整的文件路径即为http://static.dongmenshijing.com/upload/abc.jpg

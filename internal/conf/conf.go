@@ -10,7 +10,7 @@ import (
 const (
 	linuxCfg   = "/var/config/config.yaml"
 	devCfg     = "./config.yaml"
-	projectCfg = "/src/code.meikeland.com/wanghejun/cruddemo/config.yaml"
+	projectCfg = "/src/github.com/wechatapi/cruddemo/config.yaml"
 )
 
 // Init 读取配置文件

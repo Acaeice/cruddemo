@@ -10,9 +10,10 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"code.meikeland.com/wanghejun/cruddemo/util"
-	"code.meikeland.com/wanghejun/cruddemo/pkg"
+
 	"github.com/meikeland/logger"
+	"github.com/wechatapi/cruddemo/pkg"
+	"github.com/wechatapi/cruddemo/util"
 	"gorm.io/gorm"
 )
 
@@ -149,4 +150,3 @@ func (repo userSQLRepo) get(query User) (*pkg.User, error) {
 	}
 	return obj, nil
 }
-

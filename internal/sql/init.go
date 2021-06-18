@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	"code.meikeland.com/wanghejun/cruddemo/internal/conf"
-	"code.meikeland.com/wanghejun/cruddemo/pkg"
+	"github.com/wechatapi/cruddemo/internal/conf"
+	"github.com/wechatapi/cruddemo/pkg"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
