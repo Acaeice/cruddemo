@@ -12,4 +12,5 @@ type userRepoI interface {
 	GetUser(sessionKey, encryptedData, iv string) (*pkg.MAppUser, error)
 	GetByID(id uint) (*pkg.User, error)
 	GetByOpenid(openid string) (*pkg.User, error)
+	GetJDQrcode() (*pkg.Body, error)
 }

@@ -32,6 +32,7 @@ func Init() {
 
 	Db.AutoMigrate(
 		&pkg.User{},
+		&pkg.JdBound{},
 	)
 	log.Println("All table AutoMigrate finish.")
 }

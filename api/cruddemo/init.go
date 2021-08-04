@@ -3,6 +3,7 @@ package cruddemo
 import (
 	"log"
 
+	"github.com/Acaeice/jdc/sdk/jdcsdk"
 	"github.com/gin-gonic/gin"
 	"github.com/meikeland/logger"
 	"github.com/wechatapi/cruddemo/internal/conf"
@@ -20,7 +21,7 @@ func Init() {
 
 	// 其他需要初始化的sdk和internal包在这个位置完成
 	user.Init()
-
+	jdcsdk.Init(conf.GetJDQrcode())
 	// 路由初始化
 	gin.SetMode(conf.GetGin().Mode)
 	r := gin.Default()

@@ -8,8 +8,6 @@ import (
 	"log"
 	"sort"
 
-	"github.com/aliyun/alibaba-cloud-sdk-go/sdk"
-	"github.com/aliyun/alibaba-cloud-sdk-go/sdk/requests"
 	"github.com/gin-gonic/gin"
 	"github.com/meikeland/errkit"
 	"github.com/wechatapi/cruddemo/internal/user"
@@ -175,21 +173,13 @@ func answer(c *gin.Context) {
 	})
 }
 
-//阿里智能语音交互Token更新
-func getToken(c *gin.Context) {
-	client, err := sdk.NewClientWithAccessKey("cn-shanghai", "LTAI5tBcn1GoDktEP1VYrdbt", "UiQjLiwm5mVpRXVZSzZeRj4OxcLuzs")
+func getJdQrcode(c *gin.Context) {
+	qrcode, err := user.UserRepo.GetJDQrcode()
 	if err != nil {
-		panic(err)
+		fail(c, err)
+		return
 	}
-	request := requests.NewCommonRequest()
-	request.Method = "POST"
-	request.Domain = "nls-meta.cn-shanghai.aliyuncs.com"
-	request.ApiName = "CreateToken"
-	request.Version = "2019-02-28"
-	response, err := client.ProcessCommonRequest(request)
-	if err != nil {
-		panic(err)
-	}
-	fmt.Print(response.GetHttpStatus())
-	fmt.Print(response.GetHttpContentString())
+	ok(c, resp{
+		"qrcode": qrcode,
+	})
 }

@@ -3,7 +3,7 @@ module github.com/wechatapi/cruddemo
 go 1.13
 
 require (
-	github.com/aliyun/alibaba-cloud-sdk-go v1.61.1148
+	github.com/Acaeice/jdc v0.1.1
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-gonic/gin v1.7.2
 	github.com/meikeland/errkit v0.9.0

@@ -12,17 +12,17 @@ const (
 //用户表
 type User struct {
 	GormModel
-	Nick     string `json:"nick" form:"nick"`         // 昵称，必传
-	Gender   uint   `json:"gender" form:"gender"`     // 性别，必传
-	Avatar   string `json:"avatar" form:"avatar"`     // 头像，必传
-	AppID    string `json:"appID" form:"appID"`       // APPID
-	OpenID   string `json:"openID" form:"openID"`     // 微信openID
-	Language string `json:"language" from:"language"` //语言
-	City     string `json:"city" from:"city"`         //所在城市
-	Province string `json:"Province" from:"Province"` //所在省份
-	Country  string `json:"country" from:"country"`   //所在国家
+	Nick     string `json:"nick" form:"nick"`                // 昵称，必传
+	Gender   uint   `json:"gender" form:"gender"`            // 性别，必传
+	Avatar   string `json:"avatar" form:"avatar"`            // 头像，必传
+	AppID    string `json:"appID" form:"appID"`              // APPID
+	OpenID   string `json:"openID" form:"openID"`            // 微信openID
+	Language string `json:"language" from:"language"`        //语言
+	City     string `json:"city" from:"city"`                //所在城市
+	Province string `json:"Province" from:"Province"`        //所在省份
+	Country  string `json:"country" from:"country"`          //所在国家
+	JdFk     uint   `json:"JdFk" gorm:"size:10" sql:"index"` //微信绑定京东
 }
-
 
 // MAppUser 微信用户
 type MAppUser struct {

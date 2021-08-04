@@ -11,6 +11,10 @@ gin:
   # 工作模式，默认为debug，生产环境改为release
   mode: debug
 
+
+service:
+  jdcHost: 172.26.36.206:20072
+
 # 日志规则
 log:
   # 采用logrus作为底层日志引擎

@@ -11,6 +11,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/Acaeice/jdc/sdk/jdcsdk"
 	"github.com/meikeland/logger"
 	"github.com/wechatapi/cruddemo/pkg"
 	"github.com/wechatapi/cruddemo/util"
@@ -149,4 +150,17 @@ func (repo userSQLRepo) get(query User) (*pkg.User, error) {
 		return nil, errReadSubscribeCount
 	}
 	return obj, nil
+}
+
+//微服务获取qrcode
+func (repo userSQLRepo) GetJDQrcode() (*pkg.Body, error) {
+	body, err := jdcsdk.GetQrcode()
+	if err != nil {
+		return nil, err
+	}
+	result := &pkg.Body{}
+	if err := json.Unmarshal(body, &result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
