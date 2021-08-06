@@ -17,6 +17,7 @@ type User struct {
 	Avatar   string `json:"avatar" form:"avatar"`            // 头像，必传
 	AppID    string `json:"appID" form:"appID"`              // APPID
 	OpenID   string `json:"openID" form:"openID"`            // 微信openID
+	Unionid  string `json:"unionid" form:"unionid"`          // Unionid
 	Language string `json:"language" from:"language"`        //语言
 	City     string `json:"city" from:"city"`                //所在城市
 	Province string `json:"Province" from:"Province"`        //所在省份

@@ -62,6 +62,8 @@ func (repo userSQLRepo) Create(param pkg.User) (*pkg.User, error) {
 		City:     param.City,
 		Province: param.Province,
 		Country:  param.Country,
+		JdFk:     param.JdFk,
+		Unionid:  param.Unionid,
 	}
 	if err := repo.db.Create(obj).Error; err != nil {
 		contextLogger.Errorf("Create User err: %v", err)
@@ -106,13 +108,17 @@ func (repo userSQLRepo) GetUser(sessionKey, encryptedData, iv string) (*pkg.MApp
 		aesBlock                     cipher.Block
 		err                          error
 	)
+	
 	if aesKey, err = base64.StdEncoding.DecodeString(sessionKey); err != nil {
+		fmt.Printf("++++++++++++++++++++++++++++++++++++++：%s", sessionKey)
 		return nil, errors.New("解析微信用户信息失败")
 	}
 	if aesIV, err = base64.StdEncoding.DecodeString(iv); err != nil {
+		fmt.Printf("++++++++++++++++++++++++++++++++++++++：%s", iv)
 		return nil, errors.New("解析微信用户信息失败")
 	}
 	if aesCipherText, err = base64.StdEncoding.DecodeString(encryptedData); err != nil {
+		fmt.Printf("++++++++++++++++++++++++++++++++++++++：%s", encryptedData)
 		return nil, errors.New("解析微信用户信息失败")
 	}
 	aesPlantText := make([]byte, len(aesCipherText))

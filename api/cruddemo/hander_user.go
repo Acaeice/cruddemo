@@ -10,6 +10,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/meikeland/errkit"
+	"github.com/wechatapi/cruddemo/internal/shared"
 	"github.com/wechatapi/cruddemo/internal/user"
 	"github.com/wechatapi/cruddemo/pkg"
 	"github.com/wechatapi/cruddemo/util"
@@ -56,9 +57,11 @@ func wechatQuickLogin(c *gin.Context) {
 	param := &struct {
 		SessionKey        string `json:"session_key" form:"session_key"`
 		OpenID            string `json:"openid" form:"openid"`
+		Unionid           string `json:"unionid" form:"unionid"`
 		UserEncryptedData string `json:"userEncryptedData" form:"userEncryptedData"`
 		Iv                string `json:"iv" form:"iv"`
 	}{}
+
 	if err := c.ShouldBind(param); err != nil {
 		fail(c, errkit.Wrapf(err, "参数不正确"))
 		return
@@ -89,6 +92,7 @@ func wechatQuickLogin(c *gin.Context) {
 				Avatar:   wechatUser.AvatarURL,
 				AppID:    wechatUser.Watermark.AppID,
 				OpenID:   param.OpenID,
+				Unionid:  param.Unionid,
 				Language: wechatUser.Language,
 				City:     wechatUser.City,
 				Province: wechatUser.Province,
@@ -104,9 +108,11 @@ func wechatQuickLogin(c *gin.Context) {
 				fail(c, err)
 				return
 			}
+			//注入身份信息
+			shared.WithUserProfile(c, userProfile)
 			ok(c, resp{
-				"userID": userProfile.ID,
-				"token":  token.Token,
+				"userProfile": &userProfile,
+				"token":       token.Token,
 			})
 			return
 		}
@@ -117,10 +123,11 @@ func wechatQuickLogin(c *gin.Context) {
 		fail(c, err)
 		return
 	}
-
+	//注入身份信息
+	shared.WithUserProfile(c, userProfile)
 	ok(c, resp{
-		"userID": userProfile.ID,
-		"token":  token.Token,
+		"userProfile": &userProfile,
+		"token":       token.Token,
 	})
 }
 
