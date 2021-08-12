@@ -179,14 +179,3 @@ func answer(c *gin.Context) {
 		"Ok": param.Echostr,
 	})
 }
-
-func getJdQrcode(c *gin.Context) {
-	qrcode, err := user.UserRepo.GetJDQrcode()
-	if err != nil {
-		fail(c, err)
-		return
-	}
-	ok(c, resp{
-		"qrcode": qrcode,
-	})
-}

@@ -114,3 +114,12 @@ func PKCS7UnPadding(plantText []byte) []byte {
 	}
 	return plantText[:(length - unPadding)]
 }
+
+func FetchJdCookieValue(key string, cookies string) string {
+	match := regexp.MustCompile(key + `=([^;]*);{0,1}\s`).FindStringSubmatch(cookies)
+	if len(match) == 2 {
+		return match[1]
+	} else {
+		return ""
+	}
+}

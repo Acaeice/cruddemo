@@ -1,6 +1,8 @@
 package cruddemo
 
 import (
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/memstore"
 	"github.com/gin-gonic/gin"
 	// swaggerFiles "github.com/swaggo/files"
 	// ginSwagger "github.com/swaggo/gin-swagger"
@@ -20,14 +22,21 @@ func initRouter(router *gin.Engine) {
 }
 
 func initFreeCarRouter(api *gin.RouterGroup) {
+	store := memstore.NewStore([]byte("secret"))
+	store.Options(sessions.Options{
+		// MaxAge:   240,
+		HttpOnly: true,
+	})
 	freecar := api.Group("api/v1")
 	{
 		freecar.GET("/code", getCode)
 		freecar.POST("/login", wechatQuickLogin)
 		freecar.GET("/user", getuserbyId)
 		freecar.GET("", answer)
-		freecar.Use(credential)
-		freecar.Use(auth)
-		freecar.GET("/qrcode", getJdQrcode)
+		// freecar.Use(credential)
+		// freecar.Use(auth)
+		freecar.Use(sessions.Sessions("ET", store))
+		freecar.GET("/jquery", getjQuery)
+		freecar.GET("/qrcode", getQrcode)
 	}
 }

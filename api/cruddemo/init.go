@@ -3,12 +3,13 @@ package cruddemo
 import (
 	"log"
 
-	"github.com/Acaeice/jdc/sdk/jdcsdk"
 	"github.com/gin-gonic/gin"
 	"github.com/meikeland/logger"
 	"github.com/wechatapi/cruddemo/internal/conf"
+	"github.com/wechatapi/cruddemo/internal/etcode"
 	"github.com/wechatapi/cruddemo/internal/sql"
 	"github.com/wechatapi/cruddemo/internal/user"
+	"github.com/wechatapi/cruddemo/util"
 )
 
 // Init 初始化服务
@@ -18,10 +19,11 @@ func Init() {
 	sql.Init()  // 数据库初始化
 
 	initLogger()
-
+	util.UserAgent()
 	// 其他需要初始化的sdk和internal包在这个位置完成
 	user.Init()
-	jdcsdk.Init(conf.GetJDQrcode())
+	etcode.Init()
+	// jdcsdk.Init(conf.GetJDQrcode())
 	// 路由初始化
 	gin.SetMode(conf.GetGin().Mode)
 	r := gin.Default()

@@ -11,7 +11,6 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/Acaeice/jdc/sdk/jdcsdk"
 	"github.com/meikeland/logger"
 	"github.com/wechatapi/cruddemo/pkg"
 	"github.com/wechatapi/cruddemo/util"
@@ -108,7 +107,7 @@ func (repo userSQLRepo) GetUser(sessionKey, encryptedData, iv string) (*pkg.MApp
 		aesBlock                     cipher.Block
 		err                          error
 	)
-	
+
 	if aesKey, err = base64.StdEncoding.DecodeString(sessionKey); err != nil {
 		fmt.Printf("++++++++++++++++++++++++++++++++++++++：%s", sessionKey)
 		return nil, errors.New("解析微信用户信息失败")
@@ -156,17 +155,4 @@ func (repo userSQLRepo) get(query User) (*pkg.User, error) {
 		return nil, errReadSubscribeCount
 	}
 	return obj, nil
-}
-
-//微服务获取qrcode
-func (repo userSQLRepo) GetJDQrcode() (*pkg.Body, error) {
-	body, err := jdcsdk.GetQrcode()
-	if err != nil {
-		return nil, err
-	}
-	result := &pkg.Body{}
-	if err := json.Unmarshal(body, &result); err != nil {
-		return nil, err
-	}
-	return result, nil
 }
