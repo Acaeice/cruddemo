@@ -29,6 +29,7 @@ func initFreeCarRouter(api *gin.RouterGroup) {
 		// MaxAge:   240,
 		HttpOnly: true,
 		SameSite: http.SameSiteNoneMode,
+		Secure:   true,
 	})
 	freecar := api.Group("api/v1")
 	{
