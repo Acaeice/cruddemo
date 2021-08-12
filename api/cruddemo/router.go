@@ -1,6 +1,8 @@
 package cruddemo
 
 import (
+	"net/http"
+
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/memstore"
 	"github.com/gin-gonic/gin"
@@ -26,6 +28,7 @@ func initFreeCarRouter(api *gin.RouterGroup) {
 	store.Options(sessions.Options{
 		// MaxAge:   240,
 		HttpOnly: true,
+		SameSite: http.SameSiteNoneMode,
 	})
 	freecar := api.Group("api/v1")
 	{
