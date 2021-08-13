@@ -19,6 +19,7 @@ func initRouter(router *gin.Engine) {
 
 	// api文档，地址http://localhost:8080/swagger/
 	// router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	router.Use(Cors())
 	api := router.Group("")
 	initFreeCarRouter(api)
 }
@@ -33,7 +34,6 @@ func initFreeCarRouter(api *gin.RouterGroup) {
 	})
 	freecar := api.Group("api/v1")
 	{
-		freecar.Use(Cors())
 		freecar.GET("/code", getCode)
 		freecar.POST("/login", wechatQuickLogin)
 		freecar.GET("", answer)
