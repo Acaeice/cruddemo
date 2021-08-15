@@ -3,6 +3,7 @@ package cruddemo
 import (
 	"net/http"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/memstore"
 	"github.com/gin-gonic/gin"
@@ -36,7 +37,7 @@ func initFreeCarRouter(api *gin.RouterGroup) {
 		freecar.GET("/code", getCode)
 		freecar.POST("/login", wechatQuickLogin)
 		freecar.GET("", answer)
-		freecar.Use(CorsHandler())
+		freecar.Use(cors.Default())
 		freecar.Use(credential)
 		freecar.Use(auth)
 		freecar.GET("/user", getuserbyId)

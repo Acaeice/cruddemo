@@ -102,6 +102,7 @@ func logUserVisit(c *gin.Context) {
 }
 
 func CorsHandler() gin.HandlerFunc {
+
 	return func(c *gin.Context) {
 
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*") // 这是允许访问所有域
