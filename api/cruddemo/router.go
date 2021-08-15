@@ -42,7 +42,7 @@ func initFreeCarRouter(api *gin.RouterGroup) {
 			AllowOrigins:     []string{"*"},
 			AllowMethods:     []string{"GET", "POST", "OPTIONS"},
 			AllowHeaders:     []string{"Origin", "token"},
-			ExposeHeaders:    []string{"Content-Length"},
+			ExposeHeaders:    []string{"Content-Length", "token"},
 			AllowCredentials: true,
 			// AllowOriginFunc: func(origin string) bool {
 			// 	return origin == "https://github.com"
