@@ -2,6 +2,7 @@ package cruddemo
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/sessions"
@@ -37,7 +38,17 @@ func initFreeCarRouter(api *gin.RouterGroup) {
 		freecar.GET("/code", getCode)
 		freecar.POST("/login", wechatQuickLogin)
 		freecar.GET("", answer)
-		freecar.Use(cors.Default())
+		freecar.Use(cors.New(cors.Config{
+			AllowOrigins:     []string{"*"},
+			AllowMethods:     []string{"GET", "POST", "OPTIONS"},
+			AllowHeaders:     []string{"Origin", "token"},
+			ExposeHeaders:    []string{"Content-Length"},
+			AllowCredentials: true,
+			// AllowOriginFunc: func(origin string) bool {
+			// 	return origin == "https://github.com"
+			// },
+			MaxAge: 12 * time.Hour,
+		}))
 		freecar.Use(credential)
 		freecar.Use(auth)
 		freecar.GET("/user", getuserbyId)
