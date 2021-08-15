@@ -36,7 +36,7 @@ func initFreeCarRouter(api *gin.RouterGroup) {
 		freecar.GET("/code", getCode)
 		freecar.POST("/login", wechatQuickLogin)
 		freecar.GET("", answer)
-		freecar.Use(CORS())
+		freecar.Use(CorsHandler())
 		freecar.Use(credential)
 		freecar.Use(auth)
 		freecar.GET("/user", getuserbyId)

@@ -3,6 +3,7 @@ package cruddemo
 import (
 	"fmt"
 	"log"
+	"net/http"
 	"strconv"
 	"strings"
 
@@ -100,26 +101,65 @@ func logUserVisit(c *gin.Context) {
 	c.Next()
 }
 
-func CORS() gin.HandlerFunc {
-	return func(context *gin.Context) {
-		// 允许 Origin 字段中的域发送请求
-		context.Writer.Header().Add("Access-Control-Allow-Origin", "*")
-		// 设置预验请求有效期为 86400 秒
-		context.Writer.Header().Set("Access-Control-Max-Age", "86400")
-		// 设置允许请求的方法
-		context.Writer.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, UPDATE, PATCH")
-		// 设置允许请求的 Header
-		context.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, token")
-		// 设置拿到除基本字段外的其他字段，如上面的Apitoken, 这里通过引用Access-Control-Expose-Headers，进行配置，效果是一样的。
-		context.Writer.Header().Set("Access-Control-Expose-Headers", "Content-Length, Access-Control-Allow-Headers")
-		// 配置是否可以带认证信息
-		context.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
-		// OPTIONS请求返回200
-		if context.Request.Method == "OPTIONS" {
-			fmt.Println(context.Request.Header)
-			context.AbortWithStatus(200)
-		} else {
-			context.Next()
+func CorsHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*") // 这是允许访问所有域
+		// c.Header().Set("Access-Control-Allow-Origin", "")           // 跨域请求是否需要带cookie信息 默认设置为true
+		c.Header("Access-Control-Allow-Credentials", "true") // 跨域请求是否需要带cookie信息 默认设置为true
+		//  header的类型
+		c.Header("Access-Control-Allow-Origin", "*") // 这是允许访问所有域
+		// c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control,XMLHttpRequest, X-Requested-With")
+		c.Header("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, custom-header, Cache-Control,XMLHttpRequest, X-Requested-With, token")
+		//c.Header("Access-Control-Allow-Headers", "*")
+		//服务器支持的所有跨域请求的方法
+		// c.Header("Access-Control-Allow-Methods", "*")
+		c.Header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE,UPDATE")
+		// c.Header("Access-Control-Max-Age", "21600") //可以缓存预检请求结果的时间（以秒为单位）
+		// c.Set("content-type", "application/json")   // 设置返回格式是json
+		if c.Request.Method == "OPTIONS" {
+			// 	// c.AbortWithStatus(204)
+			// 	c.AbortWithStatus(http.StatusNoContent)
+			// 	return
+			// 	放行所有OPTIONS方法，本项目直接返回204
+			c.JSON(200, "Options Request!")
 		}
+
+		c.Next()
+	}
+}
+
+func Cors() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		fmt.Printf("Cors() \n")
+		method := c.Request.Method
+		origin := c.Request.Header.Get("Origin") //请求头部
+		if origin != "" {
+			//接收客户端发送的origin （重要！）
+			c.Writer.Header().Set("Access-Control-Allow-Origin", origin)
+			//服务器支持的所有跨域请求的方法
+			c.Header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE,UPDATE")
+			//允许跨域设置可以返回其他子段，可以自定义字段
+			c.Header("Access-Control-Allow-Headers", "Authorization, Content-Length, X-CSRF-Token, Token,session")
+			// 允许浏览器（客户端）可以解析的头部 （重要）
+			c.Header("Access-Control-Expose-Headers", "Content-Length, Access-Control-Allow-Origin, Access-Control-Allow-Headers")
+			//设置缓存时间
+			c.Header("Access-Control-Max-Age", "172800")
+			//允许客户端传递校验信息比如 cookie (重要)
+			c.Header("Access-Control-Allow-Credentials", "true")
+		}
+
+		//允许类型校验
+		if method == "OPTIONS" {
+			c.JSON(http.StatusOK, "ok!")
+		}
+
+		defer func() {
+			if err := recover(); err != nil {
+				log.Printf("Panic info is: %v", err)
+			}
+		}()
+
+		c.Next()
 	}
 }
