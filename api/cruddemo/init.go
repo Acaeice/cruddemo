@@ -27,6 +27,7 @@ func Init() {
 	// 路由初始化
 	gin.SetMode(conf.GetGin().Mode)
 	r := gin.Default()
+	r.Use(Cors())
 	initRouter(r)
 	log.Fatal(r.Run(":8081"))
 }
