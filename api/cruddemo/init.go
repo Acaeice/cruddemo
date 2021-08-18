@@ -19,7 +19,7 @@ func Init() {
 	sql.Init()  // 数据库初始化
 
 	initLogger()
-	util.UserAgent()
+	go util.UserAgent()
 	// 其他需要初始化的sdk和internal包在这个位置完成
 	user.Init()
 	etcode.Init()

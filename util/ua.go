@@ -11,7 +11,7 @@ var ua = "Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/6
 func UserAgent() {
 	log.Print("更新User-Agent")
 	var err error
-	ua, err = httplib.Get("https://ghproxy.com/https://raw.githubusercontent.com/cdle/jd_study/main/xdd/ua.txt").String()
+	ua, err = httplib.Get("https://cdn.jsdelivr.net/gh/cdle/xdd@main/ua.txt").String()
 	if err != nil {
 		log.Print("更新User-Agent失败")
 	}
