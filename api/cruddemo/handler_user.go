@@ -153,8 +153,8 @@ func getuserbyId(c *gin.Context) {
 //微信接入
 func answer(c *gin.Context) {
 	param := pkg.WxAccess{}
-	if err := c.ShouldBind(param); err != nil {
-		fail(c, errkit.Wrapf(err, "参数不正确"))
+	if err := c.ShouldBindQuery(&param); err != nil {
+		fail(c, errkit.Wrap(err, "参数错误"))
 		return
 	}
 	var token string = "rootwang8023"
@@ -168,7 +168,6 @@ func answer(c *gin.Context) {
 	h := sha1.New()
 	h.Write([]byte(sha1String))
 	sha1String = hex.EncodeToString(h.Sum([]byte("")))
-	log.Printf(sha1String + "+_____________________________________-")
 	if sha1String == param.Signature {
 		log.Printf("接入成功")
 	} else {
