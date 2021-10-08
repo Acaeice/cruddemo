@@ -4,7 +4,6 @@ import (
 	"crypto/sha1"
 	"encoding/hex"
 	"errors"
-	"fmt"
 	"log"
 	"sort"
 
@@ -169,10 +168,11 @@ func answer(c *gin.Context) {
 	h := sha1.New()
 	h.Write([]byte(sha1String))
 	sha1String = hex.EncodeToString(h.Sum([]byte("")))
+	log.Printf(sha1String + "+_____________________________________-")
 	if sha1String == param.Signature {
-		fmt.Printf("接入成功")
+		log.Printf("接入成功")
 	} else {
-		fmt.Printf("接入失败")
+		log.Printf("接入失败")
 	}
 
 	ok(c, resp{
