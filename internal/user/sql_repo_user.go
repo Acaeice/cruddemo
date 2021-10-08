@@ -12,6 +12,7 @@ import (
 	"net/http"
 
 	"github.com/meikeland/logger"
+	"github.com/wechatapi/cruddemo/internal/conf"
 	"github.com/wechatapi/cruddemo/pkg"
 	"github.com/wechatapi/cruddemo/util"
 	"gorm.io/gorm"
@@ -75,7 +76,8 @@ func (repo userSQLRepo) GetCode(ctx context.Context, code string) (*pkg.Code2Ses
 	if len(code) == 0 {
 		return nil, errors.New("code不能为空")
 	}
-	url := fmt.Sprintf(urlCode2Session, "wx6e415ee37673960b", "8b7b17b84d90dea852ad9e9bc117ff2a", code)
+	wechat := conf.GetWechat()
+	url := fmt.Sprintf(urlCode2Session, wechat.AppID, wechat.AppSecret, code)
 
 	resp, err := http.Get(url)
 	if err != nil {

@@ -12,6 +12,10 @@ gin:
   mode: debug
 
 
+wechatAPP:
+  appID: wx6e415ee37673960b
+  appSecret: 0b9926887571c4fd53fab47bb8cbfab2
+
 service:
   jdcHost: 127.0.0.1:8080
   #172.26.36.206:20072

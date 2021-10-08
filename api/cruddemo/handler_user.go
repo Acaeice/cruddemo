@@ -55,6 +55,7 @@ func getCode(c *gin.Context) {
 
 func wechatQuickLogin(c *gin.Context) {
 	param := &struct {
+		Code              string `json:"code" form:"code"`
 		SessionKey        string `json:"session_key" form:"session_key"`
 		OpenID            string `json:"openid" form:"openid"`
 		Unionid           string `json:"unionid" form:"unionid"`
@@ -67,7 +68,6 @@ func wechatQuickLogin(c *gin.Context) {
 		return
 	}
 	wechatUser, err := user.UserRepo.GetUser(param.SessionKey, param.UserEncryptedData, param.Iv)
-	log.Print("sss:", wechatUser)
 	if err != nil {
 		if err == pkg.ErrWechatAESInvalid {
 			fail(c, errkit.New("获取信息失败，请再试一次"))
