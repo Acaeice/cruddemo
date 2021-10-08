@@ -175,6 +175,6 @@ func answer(c *gin.Context) {
 	}
 
 	ok(c, resp{
-		"Ok": param.Echostr,
+		"echostr": param.Echostr,
 	})
 }
