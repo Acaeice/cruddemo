@@ -5,6 +5,7 @@ import (
 	"encoding/hex"
 	"errors"
 	"log"
+	"net/http"
 	"sort"
 
 	"github.com/gin-gonic/gin"
@@ -170,11 +171,10 @@ func answer(c *gin.Context) {
 	sha1String = hex.EncodeToString(h.Sum([]byte("")))
 	if sha1String == param.Signature {
 		log.Printf("接入成功")
+		c.String(http.StatusOK, param.Echostr)
 	} else {
 		log.Printf("接入失败")
+		c.String(http.StatusOK, "接入失败")
 	}
 
-	ok(c, resp{
-		"echostr": param.Echostr,
-	})
 }
